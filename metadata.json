@@ -1,11 +1,11 @@
 {
     "description": "A prophessy revelation of the future of ETHEREUM, facilitated by WEB3BRIDGE",
-    "external_url": "https://github.com/Nonnyjoe/Nft-contract",
+    "external_url": "https://github.com/Nonnyjoe/web3bridge-NFT-and-UNISWAP-interaction-test",
     "image": "https://ipfs.filebase.io/ipfs/QmWQhovJ5hU45E2K8wNAVgFcjYm2ajmh5Xx67nVPuY7PDL",
-    "name": "Ether's Future",
+    "name": "Ether's Revelation",
     "attributes": [
         {
-            "trait_type": "Ether's Future",
+            "trait_type": "Ether's Revelation",
             "value": "Reliance"
         },
         {
@@ -15,6 +15,10 @@
         {
             "trait_type": "Crypto",
             "value": "Ether"
+        },
+        {
+            "trait_type": "Powered By",
+            "value": "Web3Bridge"
         }
     ]
 }
