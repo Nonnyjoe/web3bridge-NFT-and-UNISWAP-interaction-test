@@ -2,6 +2,11 @@
 pragma solidity ^0.8.9;
 
 interface IUniswap {
+    function getPair(
+        address tokenA,
+        address tokenB
+    ) external view returns (address pair);
+    
     function removeLiquidity(
         address tokenA,
         address tokenB,

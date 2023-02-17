@@ -11,10 +11,11 @@ async function main() {
   const UNI = "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984";
   //dai holder
   const DAIHolder = "0x748dE14197922c4Ae258c7939C7739f3ff1db573";
-
+  const UNIFACTORY = "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
 
   const paths = [DAI, "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0", UNI];
   const path2 = ["0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2", DAI];
+  const UniPair = "0xf00e80f0DE9aEa0B33aA229a4014572777E422EE";
   const path3 = [DAI, UNI];
   let time = 1676669022;
   const amountToSwap = await ethers.utils.parseEther("100");
@@ -28,6 +29,8 @@ async function main() {
   const Uniswap = await ethers.getContractAt("IUniswap", ROUTER);
   const DaiContract = await ethers.getContractAt("IToken", DAI);
   const UniContract = await ethers.getContractAt("IToken", UNI);
+  const UniFactory = await ethers.getContractAt("IToken", UniPair);
+
 
   /////////////////////////////////////////////////////////////
   // IMPERSONATE A DAI HOLDER
@@ -60,8 +63,8 @@ async function main() {
   //////////////////////////////////////////////////////////////
     const addLiquidity =await Uniswap.connect(impersonatedSigner).addLiquidity(DAI, UNI, 50000, 10000, 1400, 200, DAIHolder,time);
     console.log("Successfully added liquidity to the dai and uni pair")
-    console.log(`your liquidity token is ${await addLiquidity.wait()}`)
-    console.log(await addLiquidity.wait());
+    //console.log(`your liquidity token is ${await addLiquidity.wait()}`)
+    //console.log(await addLiquidity.wait());
 
     const uniBalAftLiq = await UniContract.balanceOf(DAIHolder);
     const daiBalAftLiq = await DaiContract.balanceOf(DAIHolder);
@@ -78,6 +81,16 @@ async function main() {
     {
     value: sent,
   } );
+    console.log('liquidity added to ether')
+
+//   const pair = await UNIFACTORY.getPair("0x6B175474E89094C44Da98b954EedeAC495271d0F", "0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984");
+//   console.log(pair);
+
+    const balance = await UniFactory.connect(impersonatedSigner).balanceOf(impersonatedSigner.address);
+    console.log(await balance);
+    await UniFactory.connect(impersonatedSigner).approve(ROUTER, amountToSwap);
+
+
 
 /////////////////////////////////////////////////////////////
  // REMOVE LIQUIDITY FROM UNISWAP TO THE DAI HOLDER.
